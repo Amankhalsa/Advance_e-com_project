@@ -1,0 +1,79 @@
+# Multi AUth with Jetstream 
+================ 1st step ===========
+* 1st You have to install laravel 9 
+* 2nd Install jetstream using bellow commands 
+* 1 composer require laravel/jetstream
+* 2 php artisan jetstream:install livewire
+* 3 npm install && npm run dev
+=============== 2nd step ================
+1st Create Database and migrate it =>php artisan migrate
+
+2nd  for show profile image php artisan storage:link 
+3rd change env app url with http://127.0.0.1:8000
+==========3rd Setup Admin Table and Seed Data =======
+1st Check default route php artisan r:l
+2nd create new Admincontroller =>php artisan make:Controller AdminControler
+3rd Create model php artisan make:model Admin
+4th copy user migration table fields to admin migration file 
+5th Copy user midel class data to admin change class name Admin
+6th save and Migrate it =>php artisan migrate
+-------- Table Created -----------
+7th Create admin Factory 
+php artisan make:factory PostFactory
+8th open factory file and in defination area paste code from user factory 
+Add this code in Admin factory  
+     'name' => 'Admin',
+            'email' => 'jetadmin@gmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+use Illuminate\Support\Str;
+------------------------------
+9th Edit database file with Admin
+10th seed data using => php artisan migrate --seed
+=========== Create Guard for admin =============
+1st Go to Config folder then open Auth file 
+2nd open provider folder and open fortfy service provider
+edit register function or add some classes and function 
+use Illuminate\Contracts\Auth\StatefulGuard;
+use Laravel\Fortify\Actions\AttemptToAuthenticate;
+use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
+--------- register function --------------
+    */
+    public function register()
+    {
+        //
+        $this->app->when([AdminController::class, AttemptToAuthenticate::class,RedirectIfTwoFactorAuthenticatable::class])
+        ->needs(StatefulGuard::class)
+        ->give(function){
+            return Auth::guard('admin');
+        }
+---------------------
+After that make a folder with name Guards in app folder
+then copy data from main StatefulGuard paste into AdminStatefulGuard
+=========================== Admin guard============
+Change name space of admin Guards 
+1st copy AuthenticatedSessionController data into AdminController
+2nd change name spaces and contoller name 
+3rd update web route 
+Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){  
+Route::get('login',[AdminController::class,'loginform']);
+Route::post('/login',[AdminController::class,'store'])->name('admin.login');
+});
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+-----------------------
+4th copy RedirectIfTwoFactorAuthenticatable and AttemptToAuthenticate into fortify
+=================== create middleware ============
+1st 
+
+
+
+
+ 
+
+
+
+
+
