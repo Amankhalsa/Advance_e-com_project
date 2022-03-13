@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Backend\BrandController;
+
 use App\Models\User;
 /*
 
@@ -21,9 +23,15 @@ use App\Models\User;
 //     return view('frontend.index');
 // });
 
+Route::get('/phpinfo', function() {
+    return phpinfo();
+});
 
 
-
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
   
@@ -65,6 +73,27 @@ Route::post('update/password',[AdminProfileController::class,'admin_update_passw
 
 
 });
+
+  #######################  Admin all brands #######################
+  	// ============== Admin all brands =============
+
+Route::prefix('brand')->group(function(){
+
+Route::get('/view',[BrandController::class, 'brand_view'])->name('all.brand');
+
+
+// brand.image.store
+Route::post('/store',[BrandController::class, 'store_brand_image'])->name('brand.image.store');
+// edit.brand
+Route::get('/edit/{id}',[BrandController::class, 'edit_brand_image'])->name('edit.brand');
+// update.brand
+Route::post('/update/{id}',[BrandController::class, 'update_brand_image'])->name('update.brand');
+// delete.brand
+Route::get('/delete/{id}',[BrandController::class, 'delete_brand_image'])->name('delete.brand');
+
+
+});
+  ########################  Admin all brands end ########################
 
 
 

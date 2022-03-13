@@ -19,7 +19,7 @@
 <div class="col-12">
 
 	<div class="row">  
-		<div class="col-md-6">
+<div class="col-md-6">
 <div class="form-group">
 <h5>Current password <span class="text-danger">*</span></h5>
 <div class="controls">
