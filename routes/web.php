@@ -5,6 +5,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryContoller;
+use App\Http\Controllers\Backend\SubCategoryController;
+
+
 
 use App\Models\User;
 /*
@@ -74,7 +78,9 @@ Route::post('update/password',[AdminProfileController::class,'admin_update_passw
 
 });
 
-  #######################  Admin all brands #######################
+
+ #######################  Brands  ####################### 
+
   	// ============== Admin all brands =============
 
 Route::prefix('brand')->group(function(){
@@ -96,7 +102,42 @@ Route::get('/delete/{id}',[BrandController::class, 'delete_brand_image'])->name(
   ########################  Admin all brands end ########################
 
 
+  #######################  Admin all category #######################
 
+
+    //for prefix 
+  Route::prefix('category')->group(function(){
+
+Route::get('/view',[CategoryContoller::class, 'category_view'])->name('view.all.category');
+
+
+// brand.image.store
+Route::post('/store',[CategoryContoller::class, 'store_category'])->name('category.store');
+// edit.brand
+Route::get('/edit/{id}',[CategoryContoller::class, 'edit_category'])->name('edit.category');
+// update.brand
+Route::post('/update/{id}',[CategoryContoller::class, 'update_category'])->name('update.category');
+// delete.brand
+Route::get('/delete/{id}',[CategoryContoller::class, 'delete_category'])->name('delete.category');
+
+############################# sub category #########################
+    //for prefix 
+
+
+
+Route::get('/sub-view',[SubCategoryController::class, 'subcategory_view'])->name('view.all.subcategory');
+
+
+// brand.image.store
+Route::post('/store',[CategoryContoller::class, 'store_subcategory'])->name('category.store');
+// edit.brand
+Route::get('/edit/{id}',[CategoryContoller::class, 'edit_subcategory'])->name('edit.category');
+// update.brand
+Route::post('/update/{id}',[CategoryContoller::class, 'update_subcategory'])->name('update.category');
+// delete.brand
+Route::get('/delete/{id}',[CategoryContoller::class, 'delete_subcategory'])->name('delete.category');
+
+});
 // ================ admin all routes end ==============
 
 #########################################################################
