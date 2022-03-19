@@ -116,7 +116,7 @@ Route::post('/store',[CategoryContoller::class, 'store_category'])->name('catego
 // edit.brand
 Route::get('/edit/{id}',[CategoryContoller::class, 'edit_category'])->name('edit.category');
 // update.brand
-Route::post('/update/{id}',[CategoryContoller::class, 'update_category'])->name('update.category');
+Route::post('/update/{id}',[CategoryContoller::class, 'update_category'])->name('category.update');
 // delete.brand
 Route::get('/delete/{id}',[CategoryContoller::class, 'delete_category'])->name('delete.category');
 
@@ -129,13 +129,26 @@ Route::get('/sub-view',[SubCategoryController::class, 'subcategory_view'])->name
 
 
 // brand.image.store
-Route::post('/store',[CategoryContoller::class, 'store_subcategory'])->name('category.store');
+Route::post('/sub-store',[SubCategoryController::class, 'store_subcategory'])->name('subcategory.store');
 // edit.brand
-Route::get('/edit/{id}',[CategoryContoller::class, 'edit_subcategory'])->name('edit.category');
+Route::get('/subedit/{id}',[SubCategoryController::class, 'edit_subcategory'])->name('edit.subcategory');
 // update.brand
-Route::post('/update/{id}',[CategoryContoller::class, 'update_subcategory'])->name('update.category');
+Route::post('/sub/update/{id}',[SubCategoryController::class, 'update_subcategory'])->name('update.subcategory');
 // delete.brand
-Route::get('/delete/{id}',[CategoryContoller::class, 'delete_subcategory'])->name('delete.category');
+Route::get('/sub/delete/{id}',[SubCategoryController::class, 'delete_subcategory'])->name('delete.subcategory');
+
+
+############ admin sub sub category ###################
+Route::get('/sub/sub/view',[SubCategoryController::class, 'subsubcategory_view'])->name('view.all.subsubcategory');
+
+
+
+
+Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
+
+Route::get('/subcategory/store',[SubCategoryController::class, 'store_Sub_subCategory'])->name('sub.subcategory.store');
+
+
 
 });
 // ================ admin all routes end ==============

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{asset('backend/images/favicon.ico')}}">
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') - Admin </title>
 
   <!-- Vendors Style-->
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{asset('backend/css/skin_color.css')}}">
                <!-- Toaster CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+ 
   </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
@@ -60,7 +61,7 @@
 
    
   <!-- Vendor JS -->
-  <script src="{{asset('backend/js/vendors.min.js')}}"></script>
+<!--   <script src="{{asset('backend/js/vendors.min.js')}}"></script> -->
     <script src="{{asset('../assets/icons/feather-icons/feather.min.js')}}"></script> 
   <script src="{{asset('../assets/vendor_components/easypiechart/dist/jquery.easypiechart.js')}}"></script>
   <script src="{{asset('../assets/vendor_components/apexcharts-bundle/irregular-data-series.js')}}"></script>

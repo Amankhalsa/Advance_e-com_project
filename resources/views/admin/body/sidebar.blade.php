@@ -54,7 +54,9 @@ $route = Route::current()->getName();
 <li class="{{ ($route == 'view.all.category')?'active' : ''}}">
   <a href="{{route('view.all.category')}}"><i class="ti-more"></i>All Category</a></li>      
 <li class="{{ ($route == 'view.all.subcategory')?'active' : ''}}">
-  <a href="{{route('view.all.subcategory')}}"><i class="ti-more"></i>Sub category</a></li>
+  <a href="{{route('view.all.subcategory')}}"><i class="ti-more"></i>All Sub category</a></li>
+  <li class="{{ ($route == 'view.all.subsubcategory')?'active' : ''}}">
+  <a href="{{route('view.all.subsubcategory')}}"><i class="ti-more"></i>All sub->Sub category</a></li>
 <li><a href="mailbox_read_mail.html"><i class="ti-more"></i>Read</a></li>
           </ul>
         </li>
