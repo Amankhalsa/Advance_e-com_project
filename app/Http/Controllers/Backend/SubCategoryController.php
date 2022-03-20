@@ -175,7 +175,8 @@ $data->save();
                 );
         return redirect()->route('view.all.subsubcategory')->with($notification);
             }
-            // ================= delete_sub_subcategory===============
+
+// ================= delete_sub_subcategory===============
             public function delete_sub_subcategory($id){
             $data = SubSubCategory::find($id)->delete();
             $notification = array(

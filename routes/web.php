@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryContoller;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ProductsController;
 
 
 
@@ -162,7 +163,15 @@ Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subc
 });
 // ================ admin all routes end ==============
 
-#########################################################################
+
+
+################### Manage products ###########################
+  Route::prefix('Products')->group(function(){
+
+Route::get('add/products',[ProductsController::class,'add_products'])->name('add-products');
+
+  });
+
   //========================== User router ===================
 
 Route::get('/',[IndexController::class,'index']);
