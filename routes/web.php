@@ -31,6 +31,12 @@ Route::get('/phpinfo', function() {
     return phpinfo();
 });
 
+Route::get('/migration', function() {
+    Artisan::call('migrate');
+    return "Migration Done ";
+});
+
+
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
@@ -141,12 +147,15 @@ Route::get('/sub/delete/{id}',[SubCategoryController::class, 'delete_subcategory
 ############ admin sub sub category ###################
 Route::get('/sub/sub/view',[SubCategoryController::class, 'subsubcategory_view'])->name('view.all.subsubcategory');
 
-
-
-
 Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
 
-Route::get('/subcategory/store',[SubCategoryController::class, 'store_Sub_subCategory'])->name('sub.subcategory.store');
+Route::post('/sub/subcategory/store',[SubCategoryController::class, 'store_Sub_subCategory'])->name('sub.subcategory.store');
+
+Route::get('/sub/subedit/{id}',[SubCategoryController::class, 'edit_sub_subcategory'])->name('edit.sub.subcategory');
+
+Route::post('/sub/subupdate/{id}',[SubCategoryController::class, 'update_sub_subcategory'])->name('sub.subcategory.update');
+
+Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subcategory'])->name('delete.sub.subcategory');
 
 
 

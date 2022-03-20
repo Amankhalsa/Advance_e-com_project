@@ -121,27 +121,69 @@ $data->save();
 
         $request->validate([
             'category_id' =>'required',
-            'subcategory_name_en' =>'required',
-            'subcategory_name_hin'=>'required',
+            'subcategory_id' =>'required',
+            'sub_subcategory_name_en' =>'required',
+            'sub_subcategory_name_hin'=>'required',
         ],[
-            'subcategory_name_en.required' => 'Input sub category name English',
-            'subcategory_name_hin.required' => 'Input sub category name Hindi',
+            'category_id.required' => 'Please select any one option',
+            'subcategory_name_hin.required' => 'Input sub subcategory name Hindi',
 
         ]);
 
 
 $data = new SubSubCategory();
 $data->category_id =$request->category_id;
-$data->subcategory_name_en = $request->subcategory_name_en;
-$data->subcategory_name_hin =$request->subcategory_name_hin;
-$data->subcategory_slug_en = strtolower(str_replace(' ', '-',$request->subcategory_name_en));
-$data->subcategory_slug_hin =str_replace(' ', '-',$request->subcategory_name_hin);
+$data->subcategory_id =$request->subcategory_id;
+$data->sub_subcategory_name_en = $request->sub_subcategory_name_en;
+$data->sub_subcategory_name_hin =$request->sub_subcategory_name_hin;
+$data->sub_subcategory_slug_en = strtolower(str_replace(' ', '-',$request->sub_subcategory_name_en));
+
+$data->sub_subcategory_slug_hin =str_replace(' ', '-',$request->sub_subcategory_name_hin);
+// dd($data);
 $data->save();
-            $notification = array(
-        'message' => 'Sub Category Inserted  successfully',
-        'alert-type' => 'success'
-    );
+                $notification = array(
+                    'message' => 'Sub SubCategory Inserted  successfully',
+                    'alert-type' => 'success'
+                );
         return redirect()->back()->with($notification);
 }
+// ================== edit sub sub category ===============
+            public function edit_sub_subcategory($id){
+    $data['get_catdata'] = Category::orderBy('category_name_en', 'ASC')->get();
+    $data['get_subcatdata'] = SubCategory::latest()->get();
+    $data['get_subsubdata'] = SubSubCategory::find($id);
+        return view('admin.sub_Subcategory.edit_sub_subcategory',$data);
+
+            }
+
+            // =================update_sub_subcategory ==================
+            public function update_sub_subcategory(Request $request,$id){
+
+$data =  SubSubCategory::find($id);
+$data->category_id =$request->category_id;
+$data->subcategory_id =$request->subcategory_id;
+$data->sub_subcategory_name_en = $request->sub_subcategory_name_en;
+$data->sub_subcategory_name_hin =$request->sub_subcategory_name_hin;
+$data->sub_subcategory_slug_en = strtolower(str_replace(' ', '-',$request->sub_subcategory_name_en));
+
+$data->sub_subcategory_slug_hin =str_replace(' ', '-',$request->sub_subcategory_name_hin);
+// dd($data);
+$data->save();
+                $notification = array(
+                    'message' => 'Sub SubCategory updated   successfully',
+                    'alert-type' => 'success'
+                );
+        return redirect()->route('view.all.subsubcategory')->with($notification);
+            }
+            // ================= delete_sub_subcategory===============
+            public function delete_sub_subcategory($id){
+            $data = SubSubCategory::find($id)->delete();
+            $notification = array(
+                'message' => 'Sub subcategory Deleted  successfully',
+                'alert-type' => 'error'
+    );
+        return redirect()->route('view.all.subsubcategory')->with($notification);
+
+            }
 
 }
