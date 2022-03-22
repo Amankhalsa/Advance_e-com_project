@@ -150,6 +150,9 @@ Route::get('/sub/sub/view',[SubCategoryController::class, 'subsubcategory_view']
 
 Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
 
+Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubCategoryController::class, 'Get_Sub_subCategory']);
+
+
 Route::post('/sub/subcategory/store',[SubCategoryController::class, 'store_Sub_subCategory'])->name('sub.subcategory.store');
 
 Route::get('/sub/subedit/{id}',[SubCategoryController::class, 'edit_sub_subcategory'])->name('edit.sub.subcategory');
@@ -157,6 +160,9 @@ Route::get('/sub/subedit/{id}',[SubCategoryController::class, 'edit_sub_subcateg
 Route::post('/sub/subupdate/{id}',[SubCategoryController::class, 'update_sub_subcategory'])->name('sub.subcategory.update');
 
 Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subcategory'])->name('delete.sub.subcategory');
+
+// =============================== sub sub ajax ======================
+
 
 
 
@@ -166,9 +172,9 @@ Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subc
 
 
 ################### Manage products ###########################
-  Route::prefix('Products')->group(function(){
+  Route::prefix('product')->group(function(){
 
-Route::get('add/products',[ProductsController::class,'add_products'])->name('add-products');
+Route::get('add/products',[ProductsController::class,'add_products'])->name('add.products');
 
   });
 

@@ -115,6 +115,15 @@ $data->save();
         return json_encode($subcat);
      }
 
+
+// ==========================================================
+     // ================================Ajax ============================================
+            public function Get_Sub_subCategory($subcategory_id){
+                       $subsubcat = SubSubCategory::where('subcategory_id',$subcategory_id)->orderBy('sub_subcategory_name_en','ASC')->get();
+        return json_encode($subsubcat);
+
+            }
+
 ##################### sub cat store #################
     public function store_Sub_subCategory(Request $request){
 
@@ -186,5 +195,7 @@ $data->save();
         return redirect()->route('view.all.subsubcategory')->with($notification);
 
             }
+
+
 
 }

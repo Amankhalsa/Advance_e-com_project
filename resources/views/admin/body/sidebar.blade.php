@@ -61,7 +61,7 @@ $route = Route::current()->getName();
           </ul>
         </li>
 		
-        <li class="treeview {{ ($prefix == 'Products')?'active' : ''}}">
+  <li class="treeview {{ ($prefix == 'product')? 'active':'' }} ">
           <a href="#">
             <i data-feather="file"></i>
             <span>Products</span>
@@ -70,7 +70,7 @@ $route = Route::current()->getName();
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{route('add-products')}}"><i class="ti-more"></i>Add Products</a></li>
+            <li class="{{ ($route == 'add.products')? 'active':'' }}"><a href="{{route('add.products')}}"><i class="ti-more"></i>Add Products</a></li>
             <li><a href="invoice.html"><i class="ti-more"></i>Manage Products</a></li>
             <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
             <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
