@@ -431,7 +431,8 @@
                     type:"GET",
                     dataType:"json",
                     success:function(data) {
-                    	$('select[name="subcategory_id"]').html('');
+
+                    	$('select[name="subsubcategory_id"]').html('')
                        var d =$('select[name="subcategory_id"]').empty();
                           $.each(data, function(key, value){
                               $('select[name="subcategory_id"]').append('<option value="'+ value.id +'">' + value.subcategory_name_en + '</option>');
@@ -451,7 +452,10 @@
                     type:"GET",
                     dataType:"json",
                     success:function(data) {
-                       var d =$('select[name="subsubcategory_id"]').empty();
+
+
+                       var d = $('select[name="subsubcategory_id"]').empty();
+
                           $.each(data, function(key, value){
                               $('select[name="subsubcategory_id"]').append('<option value="'+ value.id +'">' + value.sub_subcategory_name_en + '</option>');
                           });
@@ -509,3 +513,4 @@
    
   </script>
 @endsection
+
