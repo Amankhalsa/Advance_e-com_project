@@ -14,7 +14,8 @@
 <div class="box-body">
   <div class="row">
 	<div class="col">
-		<form novalidate>
+		<form method="post" action="{{route('product.store')}}"  enctype="multipart/form-data"  >
+			@csrf
 		  <div class="row">
 			<div class="col-12">						
 
@@ -23,7 +24,7 @@
 		<div class="form-group">
 			<h5>Brand select <span class="text-danger">*</span></h5>
 			<div class="controls">
-			<select name="brand_id"   class="form-control" aria-invalid="false">
+			<select name="brand_id"   class="form-control" aria-invalid="false" required="">
 			<option selected="" disabled="">Select Your Brand</option>
 				@foreach($brands as  $value)
 				<option value="{{$value->id}}" >{{$value->brand_name_en}}</option>
@@ -40,7 +41,7 @@
 		<div class="form-group">
 				<h5>Category Select <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<select name="category_id"   class="form-control" aria-invalid="false">
+				<select name="category_id"   class="form-control" aria-invalid="false" required="">
 				<option selected="" disabled="">Select Your Category</option>
 					@foreach($get_catdata as  $value)
 					<option value="{{$value->id}}" >{{$value->category_name_en}}</option>
@@ -56,7 +57,7 @@
 			<div class="form-group">
 				<h5>Sub Category Select <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<select name="subcategory_id"   class="form-control" aria-invalid="false">
+				<select name="subcategory_id"   class="form-control" aria-invalid="false" required="">
 				<option selected="" disabled="">Select Your Category</option>
 
 				</select>
@@ -76,7 +77,7 @@
 	 		<div class="form-group">
 				<h5>SubSubCategory Select <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<select name="subsubcategory_id" class="form-control"  >
+				<select name="subsubcategory_id" class="form-control"  required="">
 				<option value="" selected="" disabled="">Select SubSubCategory</option>
 				</select>
 					@error('subsubcategory_id') 
@@ -90,7 +91,7 @@
 			<div class="form-group">
 			<h5>Product Name En <span class="text-danger">*</span></h5>
 			<div class="controls">
-			<input type="text" name="product_name_en" class="form-control">
+			<input type="text" name="product_name_en" class="form-control" required="">
 					@error('product_name_en') 
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
@@ -101,7 +102,7 @@
 			<div class="form-group">
 			<h5>Product Name Hin <span class="text-danger">*</span></h5>
 			<div class="controls">
-			<input type="text" name="product_name_hin" class="form-control">
+			<input type="text" name="product_name_hin" class="form-control" required="">
 			@error('product_name_hin') 
 			<span class="text-danger">{{ $message }}</span>
 			@enderror
@@ -116,7 +117,7 @@
 				<div class="form-group">
 				<h5>Product Code <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<input type="text" name="product_code" class="form-control">
+				<input type="text" name="product_code" class="form-control" required="">
 				@error('product_code') 
 				<span class="text-danger">{{ $message }}</span>
 				@enderror
@@ -128,7 +129,7 @@
 				<div class="form-group">
 				<h5>Product Quantity <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<input type="text" name="product_qty" class="form-control">
+				<input type="text" name="product_qty" class="form-control" required="">
 				@error('product_qty') 
 				<span class="text-danger">{{ $message }}</span>
 				@enderror
@@ -139,7 +140,7 @@
 				<div class="form-group">
 				<h5>Product Tags En <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<input type="text" name="product_tags_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput">
+				<input type="text" name="product_tags_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required="">
 					@error('product_tags_en') 
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
@@ -156,8 +157,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 				<h5>Product Tags Hin <span class="text-danger">*</span></h5>
-				<div class="controls">
-				<input type="email" name="email" class="form-control" required data-validation-required-message="This field is required"> </div>
+		
 				<input type="text" name="product_tags_hin" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput">
 				@error('product_tags_hin') 
 				<span class="text-danger">{{ $message }}</span>
@@ -171,7 +171,7 @@
 				<div class="form-group">
 				<h5>Product Size En <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<input type="text" name="product_size_en" class="form-control" value="Small,Midium,Large" data-role="tagsinput">
+				<input type="text" name="product_size_en" class="form-control" value="Small,Midium,Large" data-role="tagsinput" required="">
 					@error('product_size_en') 
 					<span class="text-danger">{{ $message }}</span>
 					@enderror
@@ -302,7 +302,7 @@
 				<div class="form-group">
 				<h5>Short Description Hindi <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<textarea name="short_descp_hin" id="textarea" class="form-control" required placeholder="Textarea text"></textarea>     
+				<textarea name="short_descp_hin" id="textarea" class="form-control" required placeholder="Textarea text" ></textarea>     
 				</div>
 				</div>
 					
@@ -380,18 +380,7 @@
 
 
 
-		<div class="col-md-6">
-
-			<div class="form-group">
-			<h5>Digital Product <span class="text-danger">pdf,xlx,csv*</span></h5>
-			<div class="controls">
-			<input type="file" name="file" class="form-control" > 
-
-			</div>
-			</div>
-
-
-		</div> <!-- end col md 4 -->
+	<!-- end col md 4 -->
 
 
 
@@ -485,18 +474,17 @@
 
 <script>
  
-  $(document).ready(function(){
-   $('#multiImg').on('change', function(){ //on file input change
-      if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+$(document).ready(function(){
+$('#multiImg').on('change', function(){ //on file input change
+if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
       {
-          var data = $(this)[0].files; //this file data
-           
-          $.each(data, function(index, file){ //loop though each file
-              if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
-                  var fRead = new FileReader(); //new filereader
-                  fRead.onload = (function(file){ //trigger function on successful read
-                  return function(e) {
-                      var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(80)
+      var data = $(this)[0].files; //this file data    
+       $.each(data, function(index, file){ //loop though each file
+          if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
+       var fRead = new FileReader(); //new filereader
+       fRead.onload = (function(file){ //trigger function on successful read
+       return function(e) {
+       var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(80)
                   .height(80); //create image element 
                       $('#preview_img').append(img); //append image to output element
                   };
