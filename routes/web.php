@@ -177,6 +177,7 @@ Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subc
 Route::get('add/products',[ProductsController::class,'add_products'])->name('add.products');
 
 Route::post('store/products',[ProductsController::class,'store_products'])->name('product.store');
+Route::get('manage/products',[ProductsController::class,'manage_products'])->name('manage.products');
 
 
   });

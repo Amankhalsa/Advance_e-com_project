@@ -17,7 +17,7 @@ class ProductsController extends Controller
     public function add_products(){
     	$data['get_catdata'] = Category::latest()->get();
     	$data['brands'] =Brand::orderBy('brand_name_en')->get();
-    	return view('admin.products.product_view',$data);
+    	return view('admin.products.product_index',$data);
 
     }
 
@@ -88,11 +88,20 @@ $uploadpath = 'upload/product/multi_images/'.$make_name;
 			'created_at'  => Carbon::now(),
 
 	]);
-			 	$notification = array(
+		$notification = array(
         'message' => 'Product Inserted  successfully',
         'alert-type' => 'success'
     );
-		return redirect()->back()->with($notification);
+		return redirect()->route('manage.products')->with($notification);
+    }
+
+// manage_products
+    public function manage_products(){
+    	$data['products'] = Product::latest()->get();
+    	return view('admin.products.product_view',$data);
+    	 
+
+
     }
 
 
