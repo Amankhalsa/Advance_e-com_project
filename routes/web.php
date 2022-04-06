@@ -172,13 +172,11 @@ Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subc
 
 
 ################### Manage products ###########################
-  Route::prefix('product')->group(function(){
-
+Route::prefix('product')->group(function(){
 Route::get('add/products',[ProductsController::class,'add_products'])->name('add.products');
-
 Route::post('store/products',[ProductsController::class,'store_products'])->name('product.store');
 Route::get('manage/products',[ProductsController::class,'manage_products'])->name('manage.products');
-
+Route::get('/edit/{id}',[ProductsController::class, 'edit_product'])->name('edit.product');
 
   });
 

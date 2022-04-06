@@ -103,6 +103,18 @@ $uploadpath = 'upload/product/multi_images/'.$make_name;
 
 
     }
+    // edit product 
+    public function edit_product($id){
+			$data['edit_category']	=  Category::latest()->get();
+			$data['edit_subcategory']	=  SubCategory::latest()->get();
+			$data['edit_subsubcat']	=  SubSubCategory::latest()->get();
+			$data['edit_brand']	=  Brand::latest()->get();
+			$data['edit_product']	=  Product::find($id);
+    	return view('admin.products.product_edit',$data);
+
+
+
+    }
 
 
 }
