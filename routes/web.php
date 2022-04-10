@@ -189,8 +189,15 @@ Route::get('/thumbnail-image-delete/{id}',[ProductsController::class, 'thumbnail
 Route::post('/image-update/',[ProductsController::class, 'multi_image_update'])->name('update.product.image');
 
 // delete multiple image 
-Route::post('/image-delete',[ProductsController::class, 'multi_image_delete'])->name('del.product.image');
+Route::get('/multi-image-delete/{id}',[ProductsController::class, 'multi_image_delete'])->name('del.product.image');
+// product view route 
 
+Route::get('/product-detail/{id}',[ProductsController::class, 'product_detail'])->name('product.detail');
+
+
+// ====================== product active inactive routes 
+Route::get('/product-active/{id}',[ProductsController::class, 'active_product'])->name('product.active');
+Route::get('/product-inactive/{id}',[ProductsController::class, 'inactive_product'])->name('product.inactive');
 
   });
 

@@ -250,8 +250,61 @@ $upload_path = 'upload/product/multi_images/'.$name_gen;
     } //ednmethod 
 
     // ================================= delete multiple image ==================
-    public function multi_image_delete(){
+    public function multi_image_delete($id){
+
+    		$old_multi_img = MultiImg::find($id);
+    		if (file_exists($old_multi_img->photo_name)) {
+    			unlink($old_multi_img->photo_name);
+    		
+    		}
+    		// end if condition 
+    		$multi_img = MultiImg::find($id)->delete();
+    			$notification = array(
+        'message' => 'Product Image  deleted successfully',
+        'alert-type' => 'error'
+    );
+		return redirect()->back()->with($notification);	
+    
 
     }
+    // ======================Active inactive =================
+public function active_product($id){
+
+	$active_product	= Product::find($id);
+	$active_product->status = 0;
+	$active_product->save();
+	    			$notification = array(
+        'message' => 'Product  inactive successfully',
+        'alert-type' => 'error'
+    );
+		return redirect()->back()->with($notification);	
+    
+
+}
+public function inactive_product($id)
+{
+	$inactive_product	= Product::find($id);
+	$inactive_product->status = 1;
+	$inactive_product->save();
+	    			$notification = array(
+        'message' => 'Product  Active successfully',
+        'alert-type' => 'success'
+    );
+		return redirect()->back()->with($notification);	
+    
+
+}
+// ================== Product detail ==========================
+public function product_detail($id){
+		$detaildata['product_detail']	=  Product::find($id);
+    	$detaildata['multi_images'] =  MultiImg::where('product_id',$id)->get();
+		
+
+    	return view('admin.products.product_detail',$detaildata);
+
+
+
+
+}
 
 }
