@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryContoller;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductsController;
+use App\Http\Controllers\Backend\SliderController;
 
 
 
@@ -59,11 +60,12 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard',
 	function () {
     
     return view('admin.index');
-})->name('dashboard');
+})->name('dashboard')->middleware('auth:admin');
 
 // ==============admin all routes =============
 
-
+Route::middleware('auth:admin')->group(function(){
+  
     //for prefix 
   Route::prefix('admin')->group(function(){
 
@@ -84,7 +86,7 @@ Route::post('update/password',[AdminProfileController::class,'admin_update_passw
 
 
 });
-
+});
 
  #######################  Brands  ####################### 
 
@@ -181,8 +183,6 @@ Route::post('/update/{id}',[ProductsController::class, 'update_product'])->name(
 // update update.thumbnail.image
 Route::post('/thumbnail-image-update/{id}',[ProductsController::class, 'thumbnail_image_update'])->name('update.thumbnail.image');
 
-// delete thubmnail image 
-Route::get('/thumbnail-image-delete/{id}',[ProductsController::class, 'thumbnail_image_delete'])->name('delete.thumbnail.image');
 
 
 // update.product.image
@@ -199,7 +199,31 @@ Route::get('/product-detail/{id}',[ProductsController::class, 'product_detail'])
 Route::get('/product-active/{id}',[ProductsController::class, 'active_product'])->name('product.active');
 Route::get('/product-inactive/{id}',[ProductsController::class, 'inactive_product'])->name('product.inactive');
 
+
+// delete thubmnail image 
+Route::get('/product-delete/{id}',[ProductsController::class, 'delete_product'])->name('delete.product');
+
+// product delete 
+
   });
+################## product prefix end ###########################
+#################### slider prefix start ######################
+Route::prefix('slider')->group(function(){
+Route::get('slider-view',[SliderController::class,'view_slider'])->name('manage.slider');
+Route::post('store/slider',[SliderController::class,'store_slider'])->name('store.slider');
+
+Route::get('/edit/{id}',[SliderController::class, 'edit_slider'])->name('edit.slider');
+Route::post('/update/{id}',[SliderController::class, 'update_slider'])->name('update.slider');
+
+// delete.slider
+Route::get('/delete/{id}',[SliderController::class, 'delete_slider'])->name('delete.slider');
+// active 
+Route::get('/inactive/{id}',[SliderController::class, 'active_slider'])->name('slider.active');
+
+
+Route::get('/active/{id}',[SliderController::class, 'inactive_slider'])->name('slider.inactive');
+  });
+#################### slider prefix end ######################
 
   //========================== User router ===================
 

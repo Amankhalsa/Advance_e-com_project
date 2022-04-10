@@ -60,7 +60,7 @@ $route = Route::current()->getName();
 
           </ul>
         </li>
-		
+		<!-- Products -->
   <li class="treeview {{ ($prefix == 'product')? 'active':'' }} ">
           <a href="#">
             <i data-feather="file"></i>
@@ -73,10 +73,27 @@ $route = Route::current()->getName();
             <li class="{{ ($route == 'add.products')? 'active':'' }}"><a href="{{route('add.products')}}"><i class="ti-more"></i>Add Products</a></li>
             <li class="{{ ($route == 'manage.products')? 'active':'' }}"><a href="{{route('manage.products')}}"><i class="ti-more"></i>Manage Products</a></li>
             <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
-            <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
-            <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>
+        
           </ul>
-        </li> 		  
+        </li> 
+        <!-- Products		   -->
+        <!-- slider  -->
+          <li class="treeview {{ ($prefix == 'slider')? 'active':'' }} ">
+          <a href="#">
+            <i data-feather="file"></i>
+            <span>Slider</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+      
+            <li class="{{ ($route == 'manage.slider')? 'active':'' }}"><a href="{{route('manage.slider')}}"><i class="ti-more"></i>Manage Slider</a></li>
+        
+          </ul>
+        </li> 
+        <!-- slider -->
+
 		         <li class="header nav-small-cap">User Interface</li>
         <li class="treeview">
           <a href="#">

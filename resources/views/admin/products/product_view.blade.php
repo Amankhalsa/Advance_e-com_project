@@ -22,8 +22,8 @@
 								<thead>
 				<tr>
 			
-					<th  width="15%">Image  </th>
-					<th  width="25%">Product en</th>
+					<th  width="10%">Image  </th>
+					<th  width="20%">Product en</th>
 					<th  width="10%"> Qyt</th>
 					<th  width="10%"> price</th>
 					
@@ -43,7 +43,17 @@
 					
 					<td>{{$value->product_qty}}</td>
 					<td>{{$value->selling_price}} </td>
-					<td>{{$value->discount_price}} </td>
+					<td>
+@if($value->discount_price == null)
+<span class="badge badge-pill badge-danger ">No discount</span>
+@else
+@php
+$amount = $value->selling_price -$value->discount_price ;
+$discount = ($amount /$value->selling_price)*100;
+@endphp
+							{{round($discount)}} % off
+@endif
+					</td>
 					<td>
 					@if($value->status == 1)
 
@@ -60,7 +70,7 @@
 					<td>
 						<a href="{{route('product.detail',$value->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
 						<a href="{{route('edit.product',$value->id)}}" class="btn btn-info"><i class="fa fa-pencil"></i></a>
-						<a href="{{route('delete.category',$value->id )}}" class="btn btn-danger" id="delete" ><i class="fa fa-trash"></i></a>
+						<a href="{{route('delete.product',$value->id )}}" class="btn btn-danger" id="delete" ><i class="fa fa-trash"></i></a>
 					@if($value->status == 1)
 
 						<a href="{{route('product.active',$value->id)}}" class="btn btn-success" title="Active"> <i class="fa fa-thumbs-up"></i></a>

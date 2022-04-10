@@ -8,61 +8,11 @@
     line-height: 24px;
     margin-inline-start: 25px;
     display: inline;
+    font-size: 20px;
 }
 
 	</style>
-<div class="box box-inverse box-success">
-				 
 
-				  <div class="box-body">
-					<ul class="custom">
-						<li>Hot Deal :
-							@if($product_detail->hot_deals == 1)
-								<span>Yes</span>
-							@else
-								<span class="text-bold text-danger">No</span>
-
-							@endif
-						 </li>
-						<li>Featured :
-							@if($product_detail->featured == 1)
-							<span>Yes</span>
-							@else
-							<span class="text-bold text-danger">No</span>
-
-							@endif
-
-							 </li>
-						<li>Special Offer :
-								@if($product_detail->special_offer == 1)
-							<span>Yes</span>
-							@else
-							<span class="text-bold text-danger">No</span>
-
-							@endif
-							 </li>
-						<li>Special Deal :		
-							@if($product_detail->special_deals == 1)
-							<span>Yes</span>
-							@else
-							<span class="text-bold text-danger">No</span>
-							@endif
-
-							 </li>
-						<li>Status : 	
-							@if($product_detail->status == 1)
-						
-							  <span class="text-bold text-info">Active</span>
-	
-							@else
-							<span class="text-bold text-danger">Inactive</span>
-
-							@endif
-				</li>
-
-					</ul>
-				  </div>
-				</div>
 		  <!-- Default box -->
 		  <div class="row">
 		  <div class="col-lg-4">
@@ -135,18 +85,29 @@
 							
 						
 							<tr>
-							<td>Product Quantity </td> <td>{{$product_detail->	product_qty}} </td>
+							<td>Product Avilablity </td> <td>
+								@if($product_detail->product_qty != null)
+									<span class="badge badge-pill text-bold badge-success  ">Avialblle</span>
+								@else
+									<span class="badge badge-pill badge-danger ">Not Avialblle</span>
+
+								@endif
+							</td>
 							</tr>
 							<tr>
 							<td>Product Selling Price </td> <td>${{$product_detail->selling_price}}  </td>
 							</tr>
 								<tr>
 							<td>Product Discount Price </td> <td>
+								@if($product_detail->discount_price == null)
+<span class="badge badge-pill badge-danger ">No discount</span>
+							@else
 @php
 $amount = $product_detail->selling_price -$product_detail->discount_price ;
 $discount = ($amount /$product_detail->selling_price)*100;
 @endphp
-							{{$discount}} % off
+							{{round($discount)}} % off
+							@endif
 							 </td>
 							</tr>	
 							<tr>
@@ -167,7 +128,59 @@ $discount = ($amount /$product_detail->selling_price)*100;
 		 </div>
 		  		  </div>
 		  		  <!-- row end  -->
+		  		  <div class="box box-outline-primary">
+<div class="box-header with-border">
 
+				  <div class="box-body">
+					<ul class="custom">
+						<li>Hot Deal :
+							@if($product_detail->hot_deals == 1)
+								<span>Yes</span>
+							@else
+								<span class="text-bold text-danger">No</span>
+
+							@endif
+						 </li>
+						<li>Featured :
+							@if($product_detail->featured == 1)
+							<span>Yes</span>
+							@else
+							<span class="text-bold text-danger">No</span>
+
+							@endif
+
+							 </li>
+						<li>Special Offer :
+								@if($product_detail->special_offer == 1)
+							<span>Yes</span>
+							@else
+							<span class="text-bold text-danger">No</span>
+
+							@endif
+							 </li>
+						<li>Special Deal :		
+							@if($product_detail->special_deals == 1)
+							<span>Yes</span>
+							@else
+							<span class="text-bold text-danger">No</span>
+							@endif
+
+							 </li>
+						<li>Status : 	
+							@if($product_detail->status == 1)
+						
+							  <span class="text-bold text-success">Active</span>
+	
+							@else
+							<span class="text-bold text-danger">Inactive</span>
+
+							@endif
+				</li>
+
+					</ul>
+				  </div>
+				</div>
+				</div>
 
 		</section>
 @endsection

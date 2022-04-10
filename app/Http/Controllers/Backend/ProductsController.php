@@ -298,7 +298,7 @@ public function inactive_product($id)
 public function product_detail($id){
 		$detaildata['product_detail']	=  Product::find($id);
     	$detaildata['multi_images'] =  MultiImg::where('product_id',$id)->get();
-		
+
 
     	return view('admin.products.product_detail',$detaildata);
 
@@ -306,5 +306,38 @@ public function product_detail($id){
 
 
 }
+
+//delete product 
+public function delete_product($id){
+	
+	$delete_product	= Product::find($id);
+	$thumbnail_img =$delete_product->product_thambnail;
+	// dd($thumbnail_img);
+	// ============= start if ================
+
+	if (file_exists($thumbnail_img)) {
+		
+		unlink($thumbnail_img);
+	}
+	 Product::find($id)->delete();
+
+	// ============= end if ================
+
+    		$multi_imgs = MultiImg::where('product_id',$id)->get();
+    		foreach ($multi_imgs as  $img) {
+			if (file_exists($img->photo_name)) {
+					unlink($img->photo_name);
+				}
+    	 MultiImg::where('product_id',$id)->delete();
+
+		    			// dd($img->photo_name);
+    		 }  //end foreach
+	$notification = array(
+			'message' => 'Product Deleted Successfully',
+			'alert-type' => 'success'
+		);
+
+		return redirect()->back()->with($notification);
+} 
 
 }
