@@ -169,14 +169,28 @@ Route::get('/sub/subdelete/{id}',[SubCategoryController::class, 'delete_sub_subc
 });
 // ================ admin all routes end ==============
 
-
-
 ################### Manage products ###########################
 Route::prefix('product')->group(function(){
 Route::get('add/products',[ProductsController::class,'add_products'])->name('add.products');
 Route::post('store/products',[ProductsController::class,'store_products'])->name('product.store');
 Route::get('manage/products',[ProductsController::class,'manage_products'])->name('manage.products');
 Route::get('/edit/{id}',[ProductsController::class, 'edit_product'])->name('edit.product');
+Route::post('/update/{id}',[ProductsController::class, 'update_product'])->name('update.product');
+
+
+// update update.thumbnail.image
+Route::post('/thumbnail-image-update/{id}',[ProductsController::class, 'thumbnail_image_update'])->name('update.thumbnail.image');
+
+// delete thubmnail image 
+Route::get('/thumbnail-image-delete/{id}',[ProductsController::class, 'thumbnail_image_delete'])->name('delete.thumbnail.image');
+
+
+// update.product.image
+Route::post('/image-update/',[ProductsController::class, 'multi_image_update'])->name('update.product.image');
+
+// delete multiple image 
+Route::post('/image-delete',[ProductsController::class, 'multi_image_delete'])->name('del.product.image');
+
 
   });
 

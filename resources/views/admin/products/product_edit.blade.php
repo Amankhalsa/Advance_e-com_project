@@ -14,7 +14,7 @@
 <div class="box-body">
   <div class="row">
 	<div class="col">
-		<form method="post" action=""  enctype="multipart/form-data"  >
+		<form method="post" action="{{route('update.product',$edit_product->id)}}"  enctype="multipart/form-data"  >
 			@csrf
 		  <div class="row">
 			<div class="col-12">						
@@ -261,34 +261,13 @@
 
 		<div class="col-md-4">
 
-				<div class="form-group">
-				<h5>Main Thambnail <span class="text-danger">*</span></h5>
-				<div class="controls">
-				<input type="file" name="product_thambnail" value="{{$edit_product->product_thambnail}}" class="form-control" onChange="mainThamUrl(this)" required="" >
-				@error('product_thambnail') 
-				<span class="text-danger">{{ $message }}</span>
-				@enderror
-				<img src="" id="mainThmb">
-				</div>
-				</div>
+
  
 				
 		</div> <!-- end col md 4 -->
 
 
-		<div class="col-md-4">
-
-			<div class="form-group">
-			<h5>Multiple Image <span class="text-danger">*</span></h5>
-			<div class="controls">
-			<input type="file" name="multi_img[]"  class="form-control" multiple="" id="multiImg" required="" >
-				@error('multi_img') 
-				<span class="text-danger">{{ $message }}</span>
-				@enderror
-			<div class="row" id="preview_img"></div>
-			</div>
-			</div>
-			</div> <!-- end col md 4 -->
+	 <!-- end col md 4 -->
 			
 		</div> <!-- end 6th row  -->
 
@@ -299,7 +278,7 @@
 				<div class="form-group">
 				<h5>Short Description English <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<textarea name="short_descp_en" value="{{$edit_product->short_descp_en}}" id="textarea" class="form-control" required placeholder="Textarea text"></textarea>     
+				<textarea name="short_descp_en"  id="textarea" class="form-control" required placeholder="Textarea text">{{$edit_product->short_descp_en}}</textarea>     	 
 				</div>
 				</div>
 			</div> <!-- end col md 6 -->
@@ -308,10 +287,7 @@
 				<div class="form-group">
 				<h5>Short Description Hindi <span class="text-danger">*</span></h5>
 				<div class="controls">
-				<textarea name="short_descp_hin" id="textarea" class="form-control" required placeholder="Textarea text" >
-					{{$edit_product->short_descp_hin}} 
-
-				</textarea>     
+				<textarea name="short_descp_hin" id="textarea" class="form-control" required placeholder="Textarea text" >{{$edit_product->short_descp_hin}} </textarea>     
 				</div>
 				</div>
 					
@@ -425,8 +401,135 @@
 		  <!-- /.box -->
 
 		</section>
+
+
+
+<!-- ========= image update section ================== -->
+
+<section class="content"> 
+	<div class="row"> 
+		<div class="col-md-12">
+				<div class="box bt-3 border-info">
+				  <div class="box-header">
+					<h4 class="box-title">Product Thubmnail Image update <strong>Top</strong></h4>
+				  </div>
+<form method="post" action="{{route('update.thumbnail.image',$edit_product->id)}}" enctype="multipart/form-data">
+	@csrf
+
+<input type="hidden" name="old_thumb_img" value="{{$edit_product->product_thambnail}}">
+	<div class="row row-sm">
+
+		<div class="col-md-3">
+			<div class="card" >
+  <img src="{{asset($edit_product->product_thambnail)}}" class="card-img-top" height="130" width="280">
+  <div class="card-body">
+    <h5 class="card-title">
+ 
+    </h5>
+    <p class="card-text">
+    	<!-- start form group  -->
+    	<div class="form-group">
+    		<label class="form-control-level">
+    			Change image <span class="text-danger">*</span>
+    		</label>
+		<input type="file" name="product_thambnail" class="form-control" multiple="" id="multiImg"  >
+				@error('product_thambnail') 
+				<span class="text-danger">{{ $message }}</span>
+				@enderror
+    	</div>
+    	<!-- end form group  -->
+    </p>
+
+  </div>
+</div>
+		</div> <!-- end col md 3 -->
+	
+	</div>
+			<div class="text-xs-right">
+<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Image">
+		 </div>
+<br><br>
+</form>
+				</div>
+			  </div>
+
+	</div>  <!--  end row -->
+</section>
+<!-- image updation section end  -->
+
+
+<!-- ========================= Multiple image update section ========================== -->
+
+<section class="content"> 
+	<div class="row"> 
+		<div class="col-md-12">
+				<div class="box bt-3 border-info">
+				  <div class="box-header">
+					<h4 class="box-title">Product Multiple Image update <strong>Top</strong></h4>
+				  </div>
+<form method="post" action="{{route('update.product.image')}}" enctype="multipart/form-data">
+	@csrf
+
+	<div class="row row-sm">
+		@foreach($multi_images as $img)
+		<div class="col-md-3">
+			<div class="card" >
+  <img src="{{asset($img->photo_name)}}" class="card-img-top" height="130" width="280">
+  <div class="card-body">
+    <h5 class="card-title">
+    	<a href="{{route('del.product.image',$img->id)}}" class="btn btn-sm btn btn-danger" id="delete" title="delete data"> <i class="fa fa-trash"></i></a>
+    </h5>
+    <p class="card-text">
+    	<!-- start form group  -->
+    	<div class="form-group">
+    		<label class="form-control-level">
+    			Change image <span class="text-danger">*</span>
+    		</label>
+		<input type="file" name="multi_img[{{$img->id}}]" class="form-control" multiple="" id="multiImg"  >
+				@error('multi_img') 
+				<span class="text-danger">{{ $message }}</span>
+				@enderror
+    	</div>
+    	<!-- end form group  -->
+    </p>
+
+  </div>
+</div>
+		</div> <!-- end col md 3 -->
+		@endforeach
+	</div>
+			<div class="text-xs-right">
+<input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Image">
+		 </div>
+<br><br>
+</form>
+				</div>
+			  </div>
+
+	</div>  <!--  end row -->
+</section>
+<!-- multiple image updation section end  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		<!-- /.content -->
-	 <script type="text/javascript">
+<script type="text/javascript">
       $(document).ready(function() {
         $('select[name="category_id"]').on('change', function(){
             var category_id = $(this).val();
@@ -448,7 +551,7 @@
                 alert('danger');
             }
         });
- $('select[name="subcategory_id"]').on('change', function(){
+ 		$('select[name="subcategory_id"]').on('change', function(){
             var subcategory_id = $(this).val();
             if(subcategory_id) {
             	console.log(subcategory_id);
@@ -472,7 +575,7 @@
         });
  
     });
-    </script>
+</script>
 
 
 <script type="text/javascript">
@@ -490,9 +593,9 @@
 
 <script>
  
-$(document).ready(function(){
-$('#multiImg').on('change', function(){ //on file input change
-if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
+		$(document).ready(function(){
+		$('#multiImg').on('change', function(){ //on file input change
+		if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
       {
       var data = $(this)[0].files; //this file data    
        $.each(data, function(index, file){ //loop though each file
@@ -515,6 +618,6 @@ if (window.File && window.FileReader && window.FileList && window.Blob) //check 
    });
   });
    
-  </script>
+</script>
 @endsection
 
