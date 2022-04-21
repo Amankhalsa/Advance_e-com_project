@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
@@ -9,9 +8,7 @@ use App\Http\Controllers\Backend\CategoryContoller;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductsController;
 use App\Http\Controllers\Backend\SliderController;
-
-
-
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Models\User;
 /*
 
@@ -91,7 +88,7 @@ Route::post('update/password',[AdminProfileController::class,'admin_update_passw
  #######################  Brands  ####################### 
 
   	// ============== Admin all brands =============
-
+Route::middleware(['auth:admin'])->group(function(){
 Route::prefix('brand')->group(function(){
 
 Route::get('/view',[BrandController::class, 'brand_view'])->name('all.brand');
@@ -222,7 +219,12 @@ Route::get('/inactive/{id}',[SliderController::class, 'active_slider'])->name('s
 
 
 Route::get('/active/{id}',[SliderController::class, 'inactive_slider'])->name('slider.inactive');
+   });
   });
+
+Route::get('/language/hindi', [LanguageController::class, 'Hindi'])->name('hindi.language');
+
+Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
 #################### slider prefix end ######################
 
   //========================== User router ===================
