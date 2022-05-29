@@ -153,7 +153,9 @@
           <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
             <div class="nav-outer">
               <ul class="nav navbar-nav">
-                <li class="active dropdown yamm-fw"> <a href="{{url('/')}}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
+                <li class="active dropdown yamm-fw"> <a href="{{url('/')}}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+       @if(session()->get('language') == 'hindi') घर   @else Home @endif
+                </a> </li>
                
 
 @php
@@ -161,7 +163,11 @@ $categories = App\Models\Category::OrderBy('category_name_en','ASC')->get();
 @endphp
     
     @foreach($categories as $key =>  $cat_values)
-                <li class="dropdown yamm mega-menu"> <a href="{{url('/')}}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{$cat_values->category_name_en}}</a>
+                <li class="dropdown yamm mega-menu"> <a href="{{url('/')}}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+
+       @if(session()->get('language') == 'hindi')  {{$cat_values->category_name_hin }}   @else  {{$cat_values->category_name_en}} @endif
+
+                 </a>
                   <ul class="dropdown-menu container">
                     <li>
                       <div class="yamm-content ">
@@ -174,17 +180,24 @@ $subcategories = App\Models\SubCategory::where('category_id',$cat_values->id)->O
 @foreach($subcategories as $subcategory)
 
                           <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                            <h2 class="title">{{$subcategory->subcategory_name_en}}</h2>
+                            <h2 class="title">
+
+       @if(session()->get('language') == 'hindi')   {{$subcategory->subcategory_name_hin  }}   @else   {{$subcategory->subcategory_name_en}} @endif
+                             </h2>
                             <ul class="links">
 
 
 
           <!-- sub sub category   -->
-          @php
+@php
 $sub_subcat = App\Models\SubSubCategory::where('subcategory_id',$subcategory->id)->OrderBy('sub_subcategory_name_en','ASC')->get();
 @endphp
 @foreach($sub_subcat as $values)
-<li><a href="#">{{ $values->sub_subcategory_name_en}}</a></li>
+<li><a href="#">
+       @if(session()->get('language') == 'hindi')    {{ $values->sub_subcategory_name_hin}}   @else    {{ $values->sub_subcategory_name_en}} @endif
+
+
+</a></li>
 @endforeach
                             </ul>
                           </div>

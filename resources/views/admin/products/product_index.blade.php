@@ -282,7 +282,8 @@
 			<div class="row" id="preview_img"></div>
 			</div>
 			</div>
-			</div> <!-- end col md 4 -->
+			</div> 
+			<!-- end col md 4 -->
 			
 		</div> <!-- end 6th row  -->
 

@@ -27,7 +27,7 @@
 			<select name="brand_id"   class="form-control" aria-invalid="false" required="">
 			<option selected="" disabled="">Select Your Brand</option>
 				@foreach($edit_brand as  $value)
-				<option value="{{$value->id}}" {{$value->id == $edit_product->id ?'selected' :''}} >{{$value->brand_name_en}}</option>
+				<option value="{{$value->id}}" {{$value->id == $edit_product->id ? 'selected' :''}} >{{$value->brand_name_en}}</option>
 				@endforeach
 				</select>
 				@error('brand_id')

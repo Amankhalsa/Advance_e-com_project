@@ -5,15 +5,26 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Category;
+use App\Models\Slider;
+use App\Models\SubCategory;
 use App\Models\User;
+use App\Models\Product;
 use Hash;
+use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     //=============== home page view =========
     public function index(){
-    	return view('frontend.index');
+
+        $categories['category'] = Category::orderBy('category_name_en','ASC')->get();
+        $categories['slider_data'] = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+        $categories['get_products'] = Product::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+
+
+    	return view('frontend.index',$categories);
     }
-    // ============== logout =================
+    // ============ logout =================
     public function user_logout(Request $request){
 
 		Auth::logout();

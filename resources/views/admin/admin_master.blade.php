@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{asset('backend/images/favicon.ico')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') - Admin </title>
+    <title>Admin - @yield('title')  </title>
 
   <!-- Vendors Style-->
   <link rel="stylesheet" href="{{asset('backend/css/vendors_css.css')}}">

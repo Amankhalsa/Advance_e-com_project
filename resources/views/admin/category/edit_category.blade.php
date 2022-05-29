@@ -22,7 +22,7 @@
 	<div class="box-body">
 		<div class="table-responsive">
 
-<form method="post" action="{{route('update.category',$edit_data->id)}}" >
+<form method="post" action="{{route('category.update',$edit_data->id)}}" >
 	@csrf
 
 <div class="form-group">
