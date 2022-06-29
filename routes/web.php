@@ -19,7 +19,6 @@ use App\Models\User;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
 */
 
 // Route::get('/', function () {
@@ -225,6 +224,8 @@ Route::get('/active/{id}',[SliderController::class, 'inactive_slider'])->name('s
 Route::get('/language/hindi', [LanguageController::class, 'Hindi'])->name('hindi.language');
 
 Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
+
+
 #################### slider prefix end ######################
 
   //========================== User router ===================
@@ -237,6 +238,9 @@ Route::get('/edit/profile',[IndexController::class,'edit_profile'])->name('edit.
 Route::get('/change/password',[IndexController::class,'change_password'])->name('change.user.password');
 Route::Post('/update/password',[IndexController::class,'update_user_password'])->name('user.password.update');
 
+// product/details/
+
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'product_details'])->name('product.details');
 
 
 

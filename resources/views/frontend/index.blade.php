@@ -955,19 +955,38 @@ $sub_subcat = App\Models\SubSubCategory::where('subcategory_id',$subcat->id)->Or
                     <div class="products">
                       <div class="product">
                         <div class="product-image">
-                          <div class="image"> <a href="detail.html">
+                          <!-- 'product/details/'.$product->id.'/'.$product->product_slug_en -->
+                          <div class="image"> <a href="{{url('product/details/'. $get_product->id .'/'.$get_product->product_slug_en)}}">
                           	<img  src="{{asset($get_product->product_thambnail)}}" alt=""></a> </div>
                           <!-- /.image -->
-                          
-                          <div class="tag new"><span>new</span></div>
+                               @php
+        $amount =  $get_product->selling_price -  $get_product->discount_price;
+        $discount = ($amount/ $get_product->selling_price) * 100;
+        @endphp     
+
+        @if($get_product->discount_price == NULL)
+          <div class="tag new"><span>new</span></div>
+
+        @else 
+          <div class="tag new"><span>{{round($discount) }} %</span></div>
+
+        @endif
                         </div>
                         <!-- /.product-image -->
                         
                         <div class="product-info text-left">
-                          <h3 class="name"><a href="detail.html">{{$get_product->product_name_en}}</a></h3>
+                         
+                          <h3 class="name"><a href="{{url('product/details/'. $get_product->id .'/'.$get_product->product_slug_en)}}">
+@if(session()->get('language') == 'hindi') {{ $get_product->product_name_hin }} @else  {{$get_product->product_name_en}} @endif
+
+                           </a></h3>
                           <div class="rating rateit-small"></div>
                           <div class="description"></div>
-                          <div class="product-price"> <span class="price">   ${{$get_product->discount_price}}</span> <span class="price-before-discount">${{$get_product->selling_price}} </span> </div>
+               @if($get_product->discount_price == NULL)
+    <div class="product-price"> <span class="price"> ${{ $get_product->selling_price }} </span>  </div>
+         @else
+ <div class="product-price"> <span class="price"> ${{ $get_product->discount_price }} </span> <span class="price-before-discount">$ {{ $get_product->selling_price }}</span> </div>
+         @endif
                           <!-- /.product-price --> 
                           
                         </div>
@@ -1031,7 +1050,18 @@ $catwisedata = App\Models\Product::where('category_id',$cate->id)->orderBy('id',
                           <h3 class="name"><a href="detail.html">{{$get_product->product_name_en}}</a></h3>
                           <div class="rating rateit-small"></div>
                           <div class="description"></div>
-                          <div class="product-price"> <span class="price">   ${{$get_product->discount_price}}</span> <span class="price-before-discount">${{$get_product->selling_price}} </span> </div>
+                          @if($get_product->discount_price == NULL)
+                          <div class="product-price">
+                          <span class="price"> 
+                             ${{$get_product->selling_price}} </span>
+                              </div>
+                             @else 
+                               <div class="product-price">
+                          <span class="price"> 
+                            ${{$get_product->discount_price}}</span>
+                             <span class="price-before-discount">
+                              ${{$get_product->selling_price}} </span> </div>
+                             @endif
                           <!-- /.product-price --> 
                           
                         </div>

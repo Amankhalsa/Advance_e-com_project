@@ -10,6 +10,9 @@ use App\Models\Slider;
 use App\Models\SubCategory;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\MultiImg;
+
+
 use Hash;
 use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
@@ -105,6 +108,14 @@ return redirect()->route('dashboard')->with($notification);
 		return redirect()->back();
 	}
 
+
+    }
+    // Product details 
+    public function product_details($id,$slug){
+
+    		$product_data['product'] = Product::find($id);
+    			$product_data['multiimg'] = MultiImg::where('product_id',$id )->get();
+    	return view('frontend.product.product_details',$product_data);
 
     }
 }

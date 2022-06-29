@@ -21,7 +21,6 @@ class ProductsController extends Controller
 
     }
 
-
     // store product 
     public function store_products(Request $request){
 if ($request->file('product_thambnail')) {
