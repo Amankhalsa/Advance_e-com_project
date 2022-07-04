@@ -21,10 +21,12 @@ class IndexController extends Controller
     public function index(){
 
         $categories['category'] = Category::orderBy('category_name_en','ASC')->get();
+       
         $categories['slider_data'] = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $categories['get_products'] = Product::where('status',1)->orderBy('id','DESC')->limit(3)->get();
-
-
+ $categories['featured'] = Product::where('featured',1)->orderBy('id','DESC')->limit(3)->get();
+  $categories['hotdeals'] = Product::where('hot_deals',1)->orderBy('id','DESC')->limit(3)->get();
+$categories['specialoffer'] = Product::where('special_offer',1)->orderBy('id','DESC')->limit(3)->get();
     	return view('frontend.index',$categories);
     }
     // ============ logout =================

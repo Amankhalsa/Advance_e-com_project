@@ -3,7 +3,6 @@
 {{$product->product_name_en}}
 @endsection
 @section('content')
-
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
@@ -22,11 +21,8 @@
 				<div class="sidebar-module-container">
 				<div class="home-banner outer-top-n">
 <img src="assets/images/banners/LHS-banner.jpg" alt="Image">
-</div>		
-  
-    
-    
-    	<!-- ============================================== HOT DEALS ============================================== -->
+</div>		    
+    	<!-- ================= HOT DEALS ================= -->
 <div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
 	<h3 class="section-title">hot deals</h3>
 	<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
@@ -243,9 +239,9 @@
 	    
     </div><!-- /.sidebar-widget -->
 </div>
-<!-- ============================================== HOT DEALS: END ============================================== -->					
+<!-- ======================= HOT DEALS: END ==================== -->					
 
-<!-- ============================================== NEWSLETTER ============================================== -->
+<!-- ================ NEWSLETTER ======================= -->
 <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
 	<h3 class="section-title">Newsletters</h3>
 	<div class="sidebar-widget-body outer-top-xs">
@@ -259,9 +255,9 @@
 		</form>
 	</div><!-- /.sidebar-widget-body -->
 </div><!-- /.sidebar-widget -->
-<!-- ============================================== NEWSLETTER: END ============================================== -->
+<!--================== NEWSLETTER: END ==================== -->
 
-<!-- ============================================== Testimonials============================================== -->
+<!-- =================Testimonials =================== -->
 <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
 	<div id="advertisement" class="advertisement">
         <div class="item">
@@ -288,7 +284,7 @@
     </div><!-- /.owl-carousel -->
 </div>
     
-<!-- ============================================== Testimonials: END ============================================== -->
+<!-- ====================== Testimonials: END ================= -->
 
  
 
@@ -324,13 +320,8 @@
             <img class="img-responsive" width="85" alt="" src="{{asset($items->photo_name)}}" data-echo="{{asset($items->photo_name)}}" />
                     </a>
                 </div>
-
-@endforeach
-
+		@endforeach
             </div><!-- /#owl-single-product-thumbnails -->
-
-            
-
         </div><!-- /.gallery-thumbs -->
 
     </div><!-- /.single-product-gallery -->
@@ -940,7 +931,7 @@
 		</div><!-- /.item -->
 			</div><!-- /.home-owl-carousel -->
 </section><!-- /.section -->
-<!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
+<!-- ====================== UPSELL PRODUCTS : END ======================= -->
 			
 			</div><!-- /.col -->
 			<div class="clearfix"></div>
@@ -970,7 +961,7 @@
 
 
 
-		<!-- ==== ================== BRANDS CAROUSEL ============================================== -->
+		<!--============ BRANDS CAROUSEL ====================== -->
 <div id="brands-carousel" class="logo-slider wow fadeInUp">
 
 		<div class="logo-slider-inner">	
